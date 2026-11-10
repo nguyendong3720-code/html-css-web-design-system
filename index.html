@@ -154,6 +154,101 @@
           </table>
         </div>
 
+        <h4 class="sub-heading">HTTP: how the browser and server talk</h4>
+        <p class="lead">
+          The browser and server communicate and transfer data using the Internet protocol
+          <strong>HTTP</strong>. Each <strong>request</strong> uses a <strong>method</strong> that says what
+          to do, and each <strong>response</strong> comes back with a <strong>status code</strong> that says how it went.
+        </p>
+
+        <div class="http-exchange">
+          <div class="http-msg">
+            <p class="http-msg-label">Request (browser → server)</p>
+<pre><code><span class="http-method">GET</span> /about HTTP/1.1
+Host: example.com</code></pre>
+          </div>
+          <span class="http-arrow">⇄</span>
+          <div class="http-msg">
+            <p class="http-msg-label">Response (server → browser)</p>
+<pre><code>HTTP/1.1 <span class="http-ok">200 OK</span>
+Content-Type: text/html
+
+&lt;!DOCTYPE html&gt;…</code></pre>
+          </div>
+        </div>
+
+        <h4 class="sub-heading">HTTP methods</h4>
+        <div class="table-wrap">
+          <table class="ref-table">
+            <thead>
+              <tr><th>Method</th><th>Meaning</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="method-pill m-get">GET</span></td>
+                <td>Retrieves information from the server</td>
+                <td>Open a web page, load a product list</td>
+              </tr>
+              <tr>
+                <td><span class="method-pill m-post">POST</span></td>
+                <td>Sends data to the server, such as customer information or a file upload</td>
+                <td>Submit a sign-up form, upload an avatar</td>
+              </tr>
+              <tr>
+                <td><span class="method-pill m-put">PUT</span></td>
+                <td>Replaces the current data with the uploaded content</td>
+                <td>Save the edited profile</td>
+              </tr>
+              <tr>
+                <td><span class="method-pill m-delete">DELETE</span></td>
+                <td>Removes the current data</td>
+                <td>Delete a comment</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="sub-heading">HTTP status codes</h4>
+        <div class="table-wrap">
+          <table class="ref-table">
+            <thead>
+              <tr><th>Code</th><th>Official meaning</th><th>In plain words</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="status-pill s-2xx">200 OK</span></td>
+                <td>The request has succeeded</td>
+                <td>✅ The request <strong>worked</strong></td>
+                <td>Open a web page and the server returns its content normally</td>
+              </tr>
+              <tr>
+                <td><span class="status-pill s-3xx">301 Moved Permanently</span></td>
+                <td>The resource has been moved and the client is being redirected</td>
+                <td>↪️ The resource has <strong>moved for good to a new address</strong></td>
+                <td>Visit an old URL and get sent to the new URL automatically</td>
+              </tr>
+              <tr>
+                <td><span class="status-pill s-4xx">404 Not Found</span></td>
+                <td>The requested resource was not found</td>
+                <td>❌ The server <strong>cannot find</strong> what was asked for</td>
+                <td>Type <code>/about123</code> but that page does not exist</td>
+              </tr>
+              <tr>
+                <td><span class="status-pill s-5xx">500 Internal Server Error</span></td>
+                <td>The server encountered an unexpected error</td>
+                <td>⚠️ The <strong>server hit an error</strong> while handling the request</td>
+                <td>The backend throws an exception and cannot return a normal result</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="score-legend">
+          Quick rule by first digit: <span class="status-pill s-2xx">2xx</span> success ·
+          <span class="status-pill s-3xx">3xx</span> redirect ·
+          <span class="status-pill s-4xx">4xx</span> client mistake ·
+          <span class="status-pill s-5xx">5xx</span> server problem
+        </p>
+
       </article>
 
 
@@ -1484,6 +1579,88 @@ input:focus { border: 2px solid blue; }</code></pre>
           </div>
         </div>
 
+        <h4 class="sub-heading">Types of breadcrumbs</h4>
+        <div class="table-wrap">
+          <table class="ref-table">
+            <thead>
+              <tr><th>Type</th><th>Example</th><th>How it works</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Location-based</td>
+                <td><code>Shopping &gt; Fashion &gt; Shoes</code></td>
+                <td>Follows the <strong>site structure</strong>. <code>Shoes</code> lives inside <code>Fashion</code>, which lives inside <code>Shopping</code>.</td>
+              </tr>
+              <tr>
+                <td>Attribute-based</td>
+                <td><code>Flats &gt; Brown</code></td>
+                <td>Follows the <strong>product attributes or filters</strong> the user picked, for example shoe style <code>Flats</code> and color <code>Brown</code>. The order is not fixed.</td>
+              </tr>
+              <tr>
+                <td>Path-based</td>
+                <td><code>Home &gt; About &gt; Register</code></td>
+                <td>Follows the <strong>actual path the user clicked</strong>. Each visit can produce a different trail.</td>
+              </tr>
+              <tr>
+                <td>Shortened path</td>
+                <td><code>… &gt; About &gt; Register</code></td>
+                <td>When the trail is too long, the early steps collapse into <code>…</code> and only the steps near the current page stay.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="example">
+          <p class="example-title">Location + attribute breadcrumb on one product page</p>
+          <div class="example-code">
+            <p class="example-label">Code</p>
+<pre><code>&lt;ul class="breadcrumb"&gt;
+  <span class="code-comment">&lt;!-- Location: where the page sits --&gt;</span>
+  &lt;li&gt;&lt;a href="#"&gt;Shopping&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;Fashion&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;Shoes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class="breadcrumb"&gt;
+  <span class="code-comment">&lt;!-- Attribute: the filters chosen --&gt;</span>
+  &lt;li&gt;&lt;a href="#"&gt;Flats&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#"&gt;Brown&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+          </div>
+          <div class="example-result">
+            <p class="example-label">Result</p>
+            <div class="render">
+              <div class="bc-types">
+                <div class="bc-group">
+                  <ul class="breadcrumb">
+                    <li><a href="#css-links">Shopping</a></li>
+                    <li><a href="#css-links">Fashion</a></li>
+                    <li><a href="#css-links">Shoes</a></li>
+                  </ul>
+                  <p class="bc-tag">Location</p>
+                </div>
+                <span class="bc-divider">|</span>
+                <div class="bc-group">
+                  <ul class="breadcrumb">
+                    <li><a href="#css-links">Flats</a></li>
+                    <li><a href="#css-links">Brown</a></li>
+                  </ul>
+                  <p class="bc-tag">Attribute</p>
+                </div>
+              </div>
+              <div class="bc-types">
+                <div class="bc-group">
+                  <ul class="breadcrumb">
+                    <li><a href="#css-links">…</a></li>
+                    <li><a href="#css-links">About</a></li>
+                    <li><a href="#css-links">Register</a></li>
+                  </ul>
+                  <p class="bc-tag">Shortened path</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </article>
 
 
@@ -1604,15 +1781,40 @@ input:focus { border: 2px solid blue; }</code></pre>
           </div>
         </div>
 
+        <div class="bs-diagram">
+          <div class="bs-case">
+            <p class="bs-title"><code>box-sizing: content-box</code> (default) · <code>width</code> sets the <strong>content</strong> only</p>
+            <div class="bs-bar bs-bar-content">
+              <span class="seg seg-border"></span>
+              <span class="seg seg-pad">padding<br>20px</span>
+              <span class="seg seg-content">content<br><strong>200px</strong></span>
+              <span class="seg seg-pad">padding<br>20px</span>
+              <span class="seg seg-border"></span>
+            </div>
+            <p class="bs-sum">1 + 20 + <strong>200</strong> + 20 + 1 = <strong>242px</strong> actual rendered width</p>
+          </div>
+          <div class="bs-case">
+            <p class="bs-title"><code>box-sizing: border-box</code> · <code>width</code> is the <strong>whole box</strong></p>
+            <div class="bs-bar bs-bar-border">
+              <span class="seg seg-border"></span>
+              <span class="seg seg-pad">padding<br>20px</span>
+              <span class="seg seg-content">content<br><strong>158px</strong> (auto)</span>
+              <span class="seg seg-pad">padding<br>20px</span>
+              <span class="seg seg-border"></span>
+            </div>
+            <p class="bs-sum">1 + 20 + <strong>158</strong> + 20 + 1 = <strong>200px</strong>: content shrinks to fit after border and padding</p>
+          </div>
+          <p class="bs-legend"><span class="key key-border"></span> border 1px <span class="key key-pad"></span> padding <span class="key key-content"></span> content (drawn at 2× scale)</p>
+        </div>
+
         <div class="example">
-          <p class="example-title">Border radius, overflow, and visibility</p>
+          <p class="example-title">Border radius and overflow</p>
           <div class="example-code">
             <p class="example-label">Code</p>
 <pre><code>.rounded { border-radius: 5px; }
 .circle  { width: 60px; height: 60px;
            border-radius: 50%; }
-.scroll  { height: 70px; overflow: scroll; }
-.hidden  { visibility: hidden; }</code></pre>
+.scroll  { height: 70px; overflow: scroll; }</code></pre>
           </div>
           <div class="example-result">
             <p class="example-label">Result</p>
@@ -1625,28 +1827,67 @@ input:focus { border: 2px solid blue; }</code></pre>
                 This content is taller than the box, so overflow: scroll shows a scrollbar.
                 Scroll down to keep reading. This line is still inside the box. The end.
               </div>
-              <div class="visibility-row">
-                <span class="vis-box">A</span><span class="vis-box vis-hidden">B</span><span class="vis-box">C</span>
-              </div>
-              <p class="caption">B is hidden but still keeps its space.</p>
             </div>
           </div>
         </div>
 
         <div class="example">
-          <p class="example-title">Margin collapse</p>
+          <p class="example-title">visibility: hidden vs display: none</p>
           <div class="example-code">
             <p class="example-label">Code</p>
-<pre><code>#img-one { margin-bottom: 30px; }
-#img-two { margin-top: 20px; }
-<span class="code-comment">/* actual gap = 30px, not 50px */</span></code></pre>
+<pre><code>.b1 { visibility: visible; }  <span class="code-comment">/* default */</span>
+.b2 { visibility: hidden; }   <span class="code-comment">/* invisible, keeps its space */</span>
+.b3 { display: none; }        <span class="code-comment">/* removed, space closes up */</span></code></pre>
+            <table class="vis-table">
+              <thead><tr><th>CSS</th><th>Visible?</th><th>Takes space?</th></tr></thead>
+              <tbody>
+                <tr><td><code>visibility: visible</code></td><td class="yes">✔ Yes</td><td class="yes">✔ Yes</td></tr>
+                <tr><td><code>visibility: hidden</code></td><td class="no">✘ No</td><td class="yes">✔ Yes</td></tr>
+                <tr><td><code>display: none</code></td><td class="no">✘ No</td><td class="no">✘ No</td></tr>
+              </tbody>
+            </table>
           </div>
           <div class="example-result">
-            <p class="example-label">Result</p>
+            <p class="example-label">Result: B is styled differently in each row</p>
             <div class="render">
-              <div class="collapse-one">#img-one · margin-bottom: 30px</div>
-              <div class="collapse-two">#img-two · margin-top: 20px</div>
-              <p class="caption">The gap between the two boxes is only 30px.</p>
+              <p class="vis-label">visibility: visible</p>
+              <div class="visibility-row"><span class="vis-box">A</span><span class="vis-box vis-b">B</span><span class="vis-box">C</span></div>
+              <p class="vis-label">visibility: hidden: a gap stays where B was</p>
+              <div class="visibility-row"><span class="vis-box">A</span><span class="vis-box vis-b vis-hidden">B</span><span class="vis-box">C</span></div>
+              <p class="vis-label">display: none: C moves into B's place</p>
+              <div class="visibility-row"><span class="vis-box">A</span><span class="vis-box vis-b vis-none">B</span><span class="vis-box">C</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="example">
+          <p class="example-title">Margins: side by side they add up, stacked they collapse</p>
+          <div class="example-code">
+            <p class="example-label">Code</p>
+<pre><code>.a { margin: 10px; }
+.b { margin: 10px; }
+.c { margin: 30px 10px; }  <span class="code-comment">/* top/bottom 30px, left/right 10px */</span>
+
+<span class="code-comment">/* A ↔ B (horizontal): 10 + 10 = 20px, margins ADD */</span>
+<span class="code-comment">/* A ↕ C (vertical): max(10, 30) = 30px, not 40px */</span>
+<span class="code-comment">/* Vertical margins COLLAPSE: only the larger one counts */</span></code></pre>
+          </div>
+          <div class="example-result">
+            <p class="example-label">Result (striped area = margin gap)</p>
+            <div class="render">
+              <div class="mc-stage">
+                <div class="mc-row">
+                  <div class="mc-box mc-a">Element A<br><code>margin: 10px</code></div>
+                  <span class="mc-gap-x">20px</span>
+                  <div class="mc-box mc-b">Element B<br><code>margin: 10px</code></div>
+                </div>
+                <div class="mc-col">
+                  <div class="mc-box mc-a2">Element A</div>
+                  <span class="mc-gap-y">30px</span>
+                  <div class="mc-box mc-c">Element C<br><code>margin: 30px 10px</code></div>
+                </div>
+              </div>
+              <p class="caption">Horizontal gap A ↔ B = 20px (10 + 10). Vertical gap A ↕ C = 30px, the larger of 10 and 30.</p>
             </div>
           </div>
         </div>
