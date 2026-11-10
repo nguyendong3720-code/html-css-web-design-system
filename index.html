@@ -931,13 +931,63 @@ New line with a &lt;span&gt;span&lt;/span&gt;.&lt;/p&gt;
           </table>
         </div>
 
-        <h4 class="sub-heading">Priority ladder</h4>
+        <h4 class="sub-heading">Specificity ladder: who wins when rules clash</h4>
+        <p class="lead">
+          When two rules style the same element, the <strong>stronger selector wins</strong>,
+          no matter which one is written first. From weakest to strongest:
+        </p>
+        <ul class="spec-rules">
+          <li><strong>Type</strong> (a tag like <code>p</code>) is the weakest.</li>
+          <li><strong>Class</strong> (<code>.headline</code>) beats any tag.</li>
+          <li><strong>Class + Type</strong> (<code>.main p</code>) beats a class alone, because it is more precise.</li>
+          <li><strong>ID</strong> (<code>#side-bar</code>) beats any number of classes.</li>
+          <li><strong>!important</strong> beats everything; use it sparingly.</li>
+          <li>Two selectors on the <strong>same rung</strong>? The rule written <strong>later</strong> in the CSS wins.</li>
+        </ul>
+
         <div class="ladder">
-          <p class="rung rung-1"><strong>Type</strong><code>h1</code></p>
-          <p class="rung rung-2"><strong>Class</strong><code>.headline</code></p>
-          <p class="rung rung-3"><strong>ID</strong><code>#side-bar</code></p>
-          <p class="rung rung-4"><strong>!important</strong><code>color: blue !important</code></p>
+
+          <div class="rung rung-1">
+            <p class="rung-name">Type</p>
+            <p class="rung-code"><code>p</code> <code>h1</code></p>
+            <p class="rung-note">Weakest: one tag only</p>
+          </div>
+
+          <div class="rung rung-2">
+            <p class="rung-name">Class</p>
+            <p class="rung-code"><code>.main</code> <code>.headline</code></p>
+            <p class="rung-note">Beats any type selector</p>
+          </div>
+
+          <div class="rung rung-3">
+            <p class="rung-name">Class + Type</p>
+            <p class="rung-code"><code>.main p</code> <code>h1.special</code></p>
+            <p class="rung-note">1 class + 1 tag: beats a class alone</p>
+          </div>
+
+          <div class="rung rung-4">
+            <p class="rung-name">ID</p>
+            <p class="rung-code"><code>#side-bar</code></p>
+            <p class="rung-note">One ID beats any number of classes</p>
+          </div>
+
+          <div class="rung rung-5">
+            <p class="rung-name">!important</p>
+            <p class="rung-code"><code>color: blue !important</code></p>
+            <p class="score-override">overrides all</p>
+            <p class="rung-note">Use sparingly</p>
+          </div>
+
         </div>
+
+        <p class="score-legend">
+          Strongest to weakest:
+          <code>!important</code> <span class="beats">beats</span>
+          <code>#side-bar</code> <span class="beats">beats</span>
+          <code>.main p</code> <span class="beats">beats</span>
+          <code>.main</code> <span class="beats">beats</span>
+          <code>p</code>
+        </p>
 
         <div class="example">
           <p class="example-title">Specificity: class beats type</p>
@@ -958,44 +1008,26 @@ h1        { color: red; }
         </div>
 
         <div class="example">
-          <p class="example-title">Pseudo-classes: hover and focus</p>
+          <p class="example-title">Chaining &amp; specificity: same tag, different result</p>
           <div class="example-code">
             <p class="example-label">Code</p>
-<pre><code>p:hover     { background-color: lime; }
-input:focus { border: 2px solid blue; }</code></pre>
-          </div>
-          <div class="example-result">
-            <p class="example-label">Result (try it)</p>
-            <div class="render">
-              <p class="demo-hover">Hover over this line</p>
-              <label class="demo-label" for="demo-input">Click the field below:</label>
-              <input class="demo-input" id="demo-input" type="text" placeholder="input:focus">
-            </div>
-          </div>
-        </div>
+<pre><code>&lt;div class="main"&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+&lt;/div&gt;
 
-        <div class="example">
-          <p class="example-title">Descendant and chaining</p>
-          <div class="example-code">
-            <p class="example-label">Code</p>
-<pre><code>&lt;ul class="main-list"&gt;
-  &lt;li&gt;Apple&lt;/li&gt;&lt;li&gt;Orange&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;&lt;li&gt;Banana&lt;/li&gt;&lt;/ul&gt;
-&lt;h1 class="special"&gt;Hello&lt;/h1&gt;
-&lt;p class="special"&gt;Welcome&lt;/p&gt;
+&lt;p&gt;Good morning&lt;/p&gt;
 
-.main-list li { color: red; }
-h1.special    { color: red; }</code></pre>
+p       { color: blue; }
+.main p { color: red; }   <span class="code-comment">/* more specific: wins inside .main */</span></code></pre>
           </div>
           <div class="example-result">
             <p class="example-label">Result</p>
             <div class="render">
-              <ul class="demo-main-list"><li>Apple</li><li>Orange</li></ul>
-              <ul><li>Banana</li></ul>
-              <p class="demo-special-h1">Hello</p>
-              <p>Welcome</p>
-              <p class="caption">Only the li items inside <code>.main-list</code> and the h1 with class <code>special</code> turn red.</p>
+              <div class="demo-main-box">
+                <p class="demo-red">Hello</p>
+              </div>
+              <p class="demo-blue">Good morning</p>
+              <p class="caption">Both are <code>&lt;p&gt;</code>. "Hello" sits inside <code>.main</code>, so <code>.main p</code> wins and it turns red. "Good morning" only matches <code>p</code>, so it stays blue.</p>
             </div>
           </div>
         </div>
@@ -1349,6 +1381,23 @@ a:active  { color: orange; }</code></pre>
                 <a class="demo-link" href="#css-links" title="This link jumps to the top of 3.6">Hover over this link</a>
                 to see the color change and the tooltip from <code>title</code>.
               </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="example">
+          <p class="example-title">Pseudo-classes: hover and focus</p>
+          <div class="example-code">
+            <p class="example-label">Code</p>
+<pre><code>p:hover     { background-color: lime; }
+input:focus { border: 2px solid blue; }</code></pre>
+          </div>
+          <div class="example-result">
+            <p class="example-label">Result (try it)</p>
+            <div class="render">
+              <p class="demo-hover">Hover over this line</p>
+              <label class="demo-label" for="demo-input">Click the field below:</label>
+              <input class="demo-input" id="demo-input" type="text" placeholder="input:focus">
             </div>
           </div>
         </div>
