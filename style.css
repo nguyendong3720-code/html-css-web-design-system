@@ -1,0 +1,964 @@
+/* ===================================
+   1. RESETTING DEFAULTS
+   Universal selector
+=================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ===================================
+   2. GENERAL PAGE STYLES
+   Type selectors and font stack
+=================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f4f6f8;
+  color: #242424;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+main {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.7;
+}
+
+
+/* ===================================
+   3. HEADER
+   ID, class, descendant selectors
+=================================== */
+
+.site-header {
+  min-height: 440px;
+  padding: 80px 20px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #2d5d7b;
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(45, 93, 123, 0.98),
+      rgba(69, 176, 140, 0.85)
+    );
+}
+
+.header-content {
+  width: 90%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+#main-title {
+  margin-bottom: 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  word-spacing: 5px;
+}
+
+.header-description {
+  max-width: 700px;
+  margin: 0 auto 35px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+
+/* Descendant combinator */
+
+.header-description strong {
+  color: #ffe0b2;
+}
+
+
+/* ===================================
+   4. NAVIGATION
+   Sticky position and z-index
+=================================== */
+
+.main-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 15px 20px;
+  background-color: #242424;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navigation-list {
+  text-align: center;
+  list-style: none;
+}
+
+.navigation-list li {
+  display: inline-block;
+  margin: 5px 12px;
+}
+
+.navigation-list a {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
+/* Link pseudo-classes in the correct order */
+
+.navigation-list a:link {
+  color: #ffffff;
+}
+
+.navigation-list a:visited {
+  color: #d9f3eb;
+}
+
+.navigation-list a:hover {
+  color: #f4a261;
+  text-decoration: underline;
+}
+
+.navigation-list a:active {
+  color: #45b08c;
+}
+
+
+/* Focus state for keyboard users */
+
+.navigation-list a:focus {
+  outline: 3px solid #f4a261;
+  outline-offset: 5px;
+}
+
+
+/* ===================================
+   5. BREADCRUMB
+   Child selector and adjacent sibling
+=================================== */
+
+.breadcrumb-container {
+  padding: 18px 5%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dddddd;
+}
+
+.breadcrumb {
+  max-width: 1200px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.breadcrumb > li {
+  display: inline;
+}
+
+.breadcrumb li + li::before {
+  padding: 0 10px;
+  color: #777777;
+  content: ">";
+}
+
+.breadcrumb a {
+  color: #2d5d7b;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #f4a261;
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #666666;
+}
+
+
+/* ===================================
+   6. SECTIONS
+   Box model
+=================================== */
+
+.design-section {
+  position: relative;
+  min-width: 280px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 35px;
+  background-color: #ffffff;
+  border: 1px solid #d7dde2;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(36, 36, 36, 0.08);
+}
+
+.section-heading {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e5e9ec;
+}
+
+.section-number {
+  display: inline-block;
+  width: 52px;
+  height: 52px;
+  margin-right: 15px;
+  padding-top: 12px;
+  color: #ffffff;
+  background-color: #2d5d7b;
+  border-radius: 50%;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: top;
+}
+
+.section-heading > div {
+  display: inline-block;
+  width: calc(100% - 75px);
+  vertical-align: top;
+}
+
+.section-heading h2 {
+  margin-bottom: 8px;
+  color: #2d5d7b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+}
+
+.section-heading p {
+  color: #626b73;
+}
+
+
+/* ===================================
+   7. COLOR PANELS
+   Inline-block, width, height, colors
+=================================== */
+
+.color-container {
+  font-size: 0;
+}
+
+.color-panel {
+  display: inline-block;
+  width: calc(33.333% - 20px);
+  min-height: 260px;
+  margin: 10px;
+  padding: 25px;
+  border-radius: 10px;
+  font-size: 16px;
+  vertical-align: top;
+}
+
+.color-panel h3 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.color-panel p {
+  margin-bottom: 10px;
+}
+
+.color-value {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.color-rgb {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.color-purpose {
+  margin-top: 25px;
+  font-size: 14px;
+}
+
+.ocean-blue {
+  color: #ffffff;
+  background-color: #2d5d7b;
+}
+
+.fresh-green {
+  color: #ffffff;
+  background-color: #45b08c;
+}
+
+.warm-orange {
+  color: #242424;
+  background-color: #f4a261;
+}
+
+.light-gray {
+  color: #242424;
+  background-color: #f4f6f8;
+  border: 1px solid #d7dde2;
+}
+
+.dark-gray {
+  color: #ffffff;
+  background-color: #242424;
+}
+
+.transparent-blue {
+  color: #242424;
+  background-color: rgba(45, 93, 123, 0.15);
+  border: 1px solid rgba(45, 93, 123, 0.4);
+}
+
+
+/* Attribute selector */
+
+[class*="color-panel"]:hover {
+  position: relative;
+  top: -5px;
+  box-shadow: 0 10px 20px rgba(36, 36, 36, 0.2);
+}
+
+
+/* ===================================
+   8. FONT PANELS
+=================================== */
+
+.font-container {
+  font-size: 0;
+}
+
+.font-panel {
+  display: inline-block;
+  width: calc(33.333% - 20px);
+  min-height: 330px;
+  margin: 10px;
+  padding: 25px;
+  background-color: #f8fafb;
+  border-left: 5px solid #45b08c;
+  border-radius: 8px;
+  font-size: 16px;
+  vertical-align: top;
+}
+
+.font-panel h3 {
+  margin-bottom: 5px;
+  color: #2d5d7b;
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+.font-category {
+  margin-bottom: 25px;
+  color: #777777;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.font-panel p {
+  margin-bottom: 18px;
+}
+
+.font-arial {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-georgia {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.font-times {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.regular {
+  font-style: normal;
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+
+/* Chaining selector */
+
+p.bold {
+  color: #2d5d7b;
+}
+
+p.italic {
+  color: #57725f;
+}
+
+
+/* ===================================
+   9. TEXT STYLE PANELS
+=================================== */
+
+.text-style-container {
+  max-height: 1100px;
+  overflow: auto;
+}
+
+.text-style-panel {
+  margin-bottom: 25px;
+  padding: 25px;
+  background-color: #f8fafb;
+  border: 1px solid #dfe5e8;
+  border-radius: 8px;
+}
+
+.text-style-panel:last-child {
+  margin-bottom: 0;
+}
+
+.example-main-heading {
+  margin-bottom: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.example-subheading {
+  margin-bottom: 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.example-card-heading {
+  margin-bottom: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  word-spacing: 2px;
+}
+
+.example-paragraph {
+  max-width: 700px;
+  margin-bottom: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.style-rules {
+  margin-left: 25px;
+}
+
+.style-rules li {
+  margin-bottom: 8px;
+}
+
+.style-rules strong {
+  color: #2d5d7b;
+}
+
+
+/* ===================================
+   10. LINKS
+=================================== */
+
+.text-link:link {
+  color: #2d5d7b;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.text-link:visited {
+  color: #6f4a8e;
+}
+
+.text-link:hover {
+  color: #f4a261;
+  text-decoration: none;
+}
+
+.text-link:active {
+  color: #45b08c;
+}
+
+
+/* Attribute selector */
+
+a[target="_blank"]::after {
+  margin-left: 4px;
+  content: "↗";
+  font-size: 12px;
+}
+
+
+/* ===================================
+   11. COMPONENT EXAMPLES
+=================================== */
+
+.component-example {
+  margin-bottom: 35px;
+  padding: 25px;
+  background-color: #f8fafb;
+  border: 1px solid #dfe5e8;
+  border-radius: 8px;
+}
+
+.component-example > h3 {
+  margin-bottom: 20px;
+  color: #2d5d7b;
+  font-size: 22px;
+}
+
+.button-group {
+  margin-top: 15px;
+}
+
+.button {
+  display: inline-block;
+  margin: 8px 8px 8px 0;
+  padding: 12px 22px;
+  border-radius: 5px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary-button {
+  display: inline-block;
+  padding: 13px 25px;
+  color: #ffffff;
+  background-color: #45b08c;
+  border: 2px solid #45b08c;
+  border-radius: 5px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  color: #ffffff;
+  background-color: #368d70;
+  border-color: #368d70;
+}
+
+.primary-button:active {
+  position: relative;
+  top: 2px;
+}
+
+.secondary-button {
+  color: #ffffff;
+  background-color: #2d5d7b;
+  border: 2px solid #2d5d7b;
+}
+
+.secondary-button:hover {
+  color: #ffffff;
+  background-color: #1f435a;
+}
+
+.secondary-button:active {
+  position: relative;
+  top: 2px;
+}
+
+.outline-button {
+  color: #2d5d7b;
+  background-color: transparent;
+  border: 2px solid #2d5d7b;
+}
+
+.outline-button:hover {
+  color: #ffffff;
+  background-color: #2d5d7b;
+}
+
+.outline-button:active {
+  position: relative;
+  top: 2px;
+}
+
+
+/* Skeuomorphic button */
+
+.skeuomorphic-button {
+  padding: 12px 25px;
+  color: #242424;
+  background-color: #f4a261;
+  border: 1px solid #c47431;
+  border-radius: 6px;
+  box-shadow: 0 6px #a75d22;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.skeuomorphic-button:hover {
+  background-color: #ffb877;
+}
+
+.skeuomorphic-button:active {
+  position: relative;
+  top: 6px;
+  box-shadow: 0 0 #a75d22;
+}
+
+button:focus,
+.button:focus,
+.primary-button:focus {
+  outline: 3px solid rgba(244, 162, 97, 0.7);
+  outline-offset: 4px;
+}
+
+
+/* ===================================
+   12. CARDS
+=================================== */
+
+.card-container {
+  font-size: 0;
+}
+
+.information-card {
+  position: relative;
+  display: inline-block;
+  width: calc(33.333% - 20px);
+  min-height: 280px;
+  margin: 10px;
+  padding: 30px 25px;
+  background-color: #ffffff;
+  border: 1px solid #d7dde2;
+  border-radius: 10px;
+  font-size: 16px;
+  vertical-align: top;
+}
+
+.information-card:hover {
+  top: -5px;
+  box-shadow: 0 10px 22px rgba(36, 36, 36, 0.15);
+}
+
+.information-card h4 {
+  margin: 25px 0 15px;
+  color: #2d5d7b;
+  font-size: 20px;
+}
+
+.information-card p {
+  margin-bottom: 20px;
+}
+
+.information-card a {
+  color: #2d5d7b;
+  font-weight: 700;
+}
+
+.featured-card {
+  border-top: 5px solid #2d5d7b;
+}
+
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px 10px;
+  color: #ffffff;
+  background-color: #2d5d7b;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.green-badge {
+  background-color: #45b08c;
+}
+
+.orange-badge {
+  color: #242424;
+  background-color: #f4a261;
+}
+
+
+/* ===================================
+   13. TABLE
+=================================== */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+th,
+td {
+  padding: 15px;
+  border: 1px solid #d7dde2;
+  text-align: left;
+}
+
+th {
+  color: #ffffff;
+  background-color: #2d5d7b;
+  font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f4f6f8;
+}
+
+tbody tr:hover {
+  background-color: rgba(69, 176, 140, 0.15);
+}
+
+tfoot td {
+  color: #555555;
+  background-color: #e9eef2;
+  font-style: italic;
+  text-align: center;
+}
+
+
+/* ===================================
+   14. CSS VISUAL AND FIGURE
+=================================== */
+
+.design-figure {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.abstract-image {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  background-color: #2d5d7b;
+  background-image:
+    linear-gradient(
+      135deg,
+      #2d5d7b,
+      #45b08c
+    );
+  border: 8px solid #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(36, 36, 36, 0.2);
+}
+
+.shape {
+  position: absolute;
+  display: block;
+}
+
+.shape-one {
+  top: 50px;
+  left: 70px;
+  width: 130px;
+  height: 130px;
+  background-color: rgba(244, 162, 97, 0.9);
+  border-radius: 50%;
+}
+
+.shape-two {
+  right: 80px;
+  bottom: 40px;
+  width: 180px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+}
+
+.shape-three {
+  top: 35px;
+  right: 170px;
+  width: 80px;
+  height: 160px;
+  background-color: rgba(36, 36, 36, 0.55);
+  border-radius: 8px;
+}
+
+.design-figure figcaption {
+  margin-top: 15px;
+  color: #666666;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+}
+
+
+/* ===================================
+   15. ASIDE
+=================================== */
+
+.design-note {
+  padding: 25px;
+  color: #242424;
+  background-color: rgba(244, 162, 97, 0.25);
+  border-left: 6px solid #f4a261;
+  border-radius: 5px;
+}
+
+.design-note h3 {
+  margin-bottom: 10px;
+  color: #8b4a16;
+}
+
+
+/* ===================================
+   16. FOOTER
+=================================== */
+
+.site-footer {
+  padding: 45px 20px;
+  color: #ffffff;
+  background-color: #242424;
+  text-align: center;
+}
+
+.site-footer p {
+  margin-bottom: 12px;
+}
+
+.footer-note {
+  color: #bbbbbb;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.site-footer a {
+  display: inline-block;
+  margin-top: 12px;
+  color: #45b08c;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: #f4a261;
+  text-decoration: underline;
+}
+
+
+/* ===================================
+   17. RESPONSIVE DESIGN
+=================================== */
+
+@media only screen and (max-width: 900px) {
+
+  #main-title {
+    font-size: 42px;
+  }
+
+  .color-panel,
+  .font-panel,
+  .information-card {
+    width: calc(50% - 20px);
+  }
+
+}
+
+
+@media only screen and (max-width: 600px) {
+
+  main {
+    width: 94%;
+  }
+
+  .site-header {
+    min-height: auto;
+    padding: 60px 18px;
+  }
+
+  #main-title {
+    font-size: 34px;
+  }
+
+  .header-description {
+    font-size: 16px;
+  }
+
+  .main-navigation {
+    position: static;
+  }
+
+  .navigation-list li {
+    display: block;
+    margin: 12px 0;
+  }
+
+  .design-section {
+    padding: 22px;
+  }
+
+  .section-number {
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .section-heading > div {
+    display: block;
+    width: 100%;
+  }
+
+  .color-panel,
+  .font-panel,
+  .information-card {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .example-main-heading {
+    font-size: 30px;
+  }
+
+  .button {
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    text-align: center;
+  }
+
+}
